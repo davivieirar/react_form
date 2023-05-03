@@ -1,54 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const UsuarioForm = () => {
+  // const [nome, setNome] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [senha, setSenha] = useState("");
+
+  const [usuario, setUsuario] = useState({
+    nome: '',
+    email: '',
+    senha: ''
+  })
+  const submeterForm = (event) => {
+    event.preventDefault();
+    console.log(usuario)
+  };
+
+const atualizarValor = (event) => {
+  const id = event.target.id
+  const valor = event.target.value
+  setUsuario({ ...usuario, [id]: valor })
+}
+
+
   return (
     <div className="container">
-      <form className="col">
+      <form className="col" onSubmit={submeterForm}>
         <h2>Cadastro de Usuários</h2>
-        <hr/>
+        <hr />
 
-        <div class={`col-md-20 mb-3`}>
-          <label for="name" class="form-label">
+        <div className={`col-md-20 mb-3`}>
+          <label htmlFor="name" className="form-label">
             Name
           </label>
-          <input type="text" class="form-control" id="name" value="" required />
-          <div class="valid-feedback">Looks good!</div>
+          <input
+            type="text"
+            className="form-control"
+            id="nome"
+            required
+            value={usuario.nome}
+            onChange={atualizarValor}
+          />
+          <div className="valid-feedback">Looks good!</div>
         </div>
 
-        <div class={`col-md-20 mb-3`}>
-          <label for="email" class="form-label">
+        <div className={`col-md-20 mb-3`}>
+          <label htmlFor="email" className="form-label">
             Email
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="email"
-            value=""
             required
+            value={usuario.email}
+            onChange={atualizarValor}
           />
-          <div class="valid-feedback">Looks good!</div>
+          <div className="valid-feedback">Looks good!</div>
         </div>
 
-        <div class={`col-md-20 mb-3`}>
-          <label for="password" class="form-label">
-            First name
+        <div className={`col-md-20 mb-3`}>
+          <label htmlFor="password" className="form-label">
+            Password
           </label>
           <input
             type="password"
-            class="form-control"
-            id="password"
-            value=""
+            className="form-control"
+            id="senha"
             required
+            value={usuario.senha}
+            onChange={atualizarValor}
           />
-          <div class="valid-feedback">Looks good!</div>
+          <div className="valid-feedback">Looks good!</div>
         </div>
 
-        <div class="col-12">
-          <button class="btn btn-primary" type="submit">
+        <div className="col-12">
+          <button className="btn btn-primary" type="submit">
             Submit form
           </button>
         </div>
-
       </form>
     </div>
   );
